@@ -17,24 +17,24 @@ enum ProductStatus {
 }
 
 model Product {
-  id        Int @id @default(autoincrement())
-  account String
+  id            Int           @id @default(autoincrement())
+  account       String
   referenceCode String?
-  identifiers String[]
-  name      String? @db.VarChar(127)
-  description String? @db.VarChar(255)
-  slug     String? @db.VarChar(63)
-  status   ProductStatus @default(INACTIVE)
-  attributes Attribute[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  identifiers   String[]
+  name          String?       @db.VarChar(127)
+  description   String?       @db.VarChar(1023)
+  slug          String?       @db.VarChar(63)
+  status        ProductStatus @default(INACTIVE)
+  attributes    Attribute[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 model Attribute {
-  id        Int @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   name      String
   value     String
   label     String?
-  product  Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
   productId Int
 }
