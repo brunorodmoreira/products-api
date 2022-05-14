@@ -6,10 +6,12 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { NotFoundInterceptor } from 'src/interceptors/not-found/not-found.interceptor';
 
 @Controller('products')
 export class ProductsController {
@@ -26,6 +28,7 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @UseInterceptors(NotFoundInterceptor)
   findOne(@Param('id') id: string) {
     return this.productsService.findOne(+id);
   }

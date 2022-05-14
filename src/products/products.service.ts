@@ -13,7 +13,6 @@ export class ProductsService {
   }
 
   findAll(): Promise<Product[]> {
-    console.log('oi');
     return this.prisma.product.findMany();
   }
 
