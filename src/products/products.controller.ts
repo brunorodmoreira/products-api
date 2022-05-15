@@ -16,7 +16,6 @@ import { NotFoundInterceptor } from 'src/core/interceptors/not-found.interceptor
 import { Hateoas } from 'src/common/decorators/hateoas.decorator';
 
 @Controller('products')
-@Hateoas({ collectionWrapper: 'products' })
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
