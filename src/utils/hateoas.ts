@@ -5,9 +5,9 @@ type HateoasLinks = {
   custom?: { [key: string]: string };
 };
 
-export function buildHeatoasLinksForItem(prefix: string, itemId: string) {
+export function buildHateoasLinksForItem(prefix: string, itemId: string) {
   return buildHateoasLinks({
-    self: `${prefix}${itemId}`,
+    self: `${prefix}${prefix.endsWith('/') ? '' : '/'}${itemId}`,
   });
 }
 

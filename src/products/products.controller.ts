@@ -11,11 +11,11 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { NotFoundInterceptor } from 'src/interceptors/not-found/not-found.interceptor';
-import { HateoasInterceptor } from 'src/interceptors/hateoas/hateoas.interceptor';
+import { NotFoundInterceptor } from 'src/core/interceptors/not-found.interceptor';
+import { Hateoas } from 'src/common/decorators/hateoas.decorator';
 
 @Controller('products')
-@UseInterceptors(new HateoasInterceptor('products'))
+@Hateoas({ collectionWrapper: 'products' })
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
