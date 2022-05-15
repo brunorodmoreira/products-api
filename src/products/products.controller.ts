@@ -7,13 +7,14 @@ import {
   Param,
   Delete,
   UseInterceptors,
-  ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { NotFoundInterceptor } from 'src/core/interceptors/not-found.interceptor';
-import { Hateoas } from 'src/common/decorators/hateoas.decorator';
+import { PaginationParams } from 'src/common/params/pagination.params';
+import { FindOneParams } from 'src/common/params/find-one.params';
 
 @Controller('products')
 export class ProductsController {
@@ -25,13 +26,13 @@ export class ProductsController {
   }
 
   @Get()
-  findAll() {
-    return this.productsService.findAll();
+  findAll(@Query() query: PaginationParams) {
+    return this.productsService.findAll(query);
   }
 
   @Get(':id')
   @UseInterceptors(NotFoundInterceptor)
-  findOne(@Param('id', new ParseIntPipe()) id: number) {
+  findOne(@Param() { id }: FindOneParams) {
     return this.productsService.findOne(id);
   }
 
