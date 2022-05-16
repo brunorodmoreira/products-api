@@ -27,7 +27,7 @@ export class CreateProductDto {
   @IsString({
     each: true,
   })
-  identifiers: string[];
+  identifiers?: string[];
 
   @IsOptional()
   @IsString()

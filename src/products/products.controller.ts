@@ -12,9 +12,9 @@ import {
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { NotFoundInterceptor } from 'src/core/interceptors/not-found.interceptor';
-import { PaginationParams } from 'src/common/params/pagination.params';
-import { FindOneParams } from 'src/common/params/find-one.params';
+import { NotFoundInterceptor } from '../core/interceptors/not-found.interceptor';
+import { PaginationParams } from '../common/params/pagination.params';
+import { FindOneParams } from '../common/params/find-one.params';
 
 @Controller('products')
 export class ProductsController {
