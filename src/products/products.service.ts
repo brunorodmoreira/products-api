@@ -1,18 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, Product } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { DEFAULT_PAGE, DEFAULT_SIZE } from 'src/utils/constants';
+import { PrismaService } from '../prisma/prisma.service';
+import { DEFAULT_PAGE, DEFAULT_SIZE } from '../utils/constants';
 import {
   parsePageAndSizeToSkipAndTake,
   parseQueryToWhereArgs,
-} from 'src/utils/query';
-import { UpdateProductDto } from './dto/update-product.dto';
+} from '../utils/query';
 
 @Injectable()
 export class ProductsService {
   constructor(private prisma: PrismaService) {}
 
-  create(data: Prisma.ProductCreateInput) {
+  create(data: Prisma.ProductCreateInput): Promise<Product> {
     return this.prisma.product.create({
       data: data,
     });
@@ -34,17 +33,14 @@ export class ProductsService {
     return this.prisma.product.findUnique({ where: { id } });
   }
 
-  update(
-    id: number,
-    data: Prisma.ProductUpdateInput,
-  ): Promise<Partial<Product>> {
+  update(id: number, data: Prisma.ProductUpdateInput): Promise<Product> {
     return this.prisma.product.update({
       where: { id },
       data: data,
     });
   }
 
-  remove(id: number) {
+  remove(id: number): Promise<Product> {
     return this.prisma.product.delete({ where: { id } });
   }
 }
