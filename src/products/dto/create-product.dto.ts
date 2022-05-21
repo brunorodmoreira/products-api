@@ -1,4 +1,4 @@
-import { ProductStatus } from '@prisma/client';
+import { ProductStatus, Prisma } from '@prisma/client';
 import { Transform } from 'class-transformer';
 import {
   IsDateString,
@@ -10,7 +10,7 @@ import {
   Min,
 } from 'class-validator';
 
-export class CreateProductDto {
+export class CreateProductDto implements Prisma.ProductCreateInput {
   @IsOptional()
   @IsInt()
   @Min(1)
