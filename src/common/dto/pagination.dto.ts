@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator';
 
-export class PaginationParams {
+export class PaginationDto {
   @IsOptional()
   @Type(() => Number)
   @IsInt()
