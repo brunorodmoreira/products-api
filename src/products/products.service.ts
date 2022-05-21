@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { parseOptionsToPrismaFindManyArgs } from 'src/utils/prisma';
 import { PrismaService } from '../prisma/prisma.service';
-import { DEFAULT_PAGE, DEFAULT_SIZE } from '../utils/constants';
+import { DEFAULT_PAGE, DEFAULT_SIZE } from '../utils/constants.utils';
 import {
   parsePageAndSizeToSkipAndTake,
   parseQueryToWhereArgs,
-} from '../utils/query';
+} from '../utils/pagination-and-filter.utils';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
@@ -20,15 +21,9 @@ export class ProductsService {
   }
 
   findAll(options: any): Promise<Product[]> {
-    const { page = DEFAULT_PAGE, size = DEFAULT_SIZE, ...query } = options;
+    const args = parseOptionsToPrismaFindManyArgs(options);
 
-    const { skip, take } = parsePageAndSizeToSkipAndTake(page, size);
-
-    return this.prisma.product.findMany({
-      skip,
-      take,
-      where: parseQueryToWhereArgs(query),
-    });
+    return this.prisma.product.findMany(args);
   }
 
   findOne(id: number): Promise<Product | null> {
