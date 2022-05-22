@@ -9,7 +9,6 @@ async function bootstrap() {
       transform: true,
       stopAtFirstError: true,
       whitelist: true,
-      forbidNonWhitelisted: true,
     }),
   );
 

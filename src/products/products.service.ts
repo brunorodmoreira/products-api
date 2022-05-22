@@ -1,11 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { parseOptionsToPrismaFindManyArgs } from 'src/utils/prisma';
 import { PrismaService } from '../prisma/prisma.service';
-import { DEFAULT_PAGE, DEFAULT_SIZE } from '../utils/constants.utils';
-import {
-  parsePageAndSizeToSkipAndTake,
-  parseQueryToWhereArgs,
-} from '../utils/pagination-and-filter.utils';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
